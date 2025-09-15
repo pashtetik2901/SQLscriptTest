@@ -2,20 +2,11 @@ from fastapi import FastAPI
 from app.config import setting
 from database.model import simply_db_conn
 from database.model.script_db.script import add_product
-# from database.model.script_db import
 from app.model_valid.response_model import MainResponse
 from app.model_valid.request_model import NewOrder
 import uvicorn
 
 app = FastAPI()
-
-@app.get('/')
-async def hello():
-    return f"{setting.DB_PATH}"
-
-@app.get("/go")
-async def golang():
-    return f"{simply_db_conn.Message.name}"
 
 @app.post("/add", response_model=MainResponse)
 async def add_order_item(data: NewOrder):
